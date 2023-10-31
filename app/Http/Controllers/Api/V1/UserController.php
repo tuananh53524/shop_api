@@ -25,9 +25,8 @@ class UserController extends BaseController
             'email' => $request->email,
         ];
         $users = $this->userService->index($params,true);
-        $success['users'] =  $users;
 
-        return $this->sendResponse($success, '');
+        return $this->sendResponse($users, '');
     }
 
 }
