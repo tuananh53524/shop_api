@@ -10,6 +10,10 @@ Route::namespace('App\Http\Controllers\Api\V1')
         // Route::post('/register', 'AuthController@createUser');
 
         Route::get('users',[UserController::class,'index'])->name('user.index');
+        Route::post('users',[UserController::class,'createUser'])->name('user.create');
+        Route::get('users/{id}',[UserController::class,'getUser'])->name('user.get');
+        Route::post('users/{id}',[UserController::class,'updateUser'])->name('user.update');
+        Route::delete('users/{id}',[UserController::class,'deleteUser'])->name('user.delete');
 
         Route::middleware(['auth:sanctum'])->group(function () {
         });

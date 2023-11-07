@@ -9,7 +9,6 @@ class UserServiceImpl implements UserService
 {
     public function index($params, $paginate)
     {
-        
         $users = User::select(['id','name','email'])->paginate($params['per_page']);
         return $users;
     }
@@ -34,38 +33,24 @@ class UserServiceImpl implements UserService
     //     return !empty($params['limit']) ? $users->limit($params['limit'])->get() : $users->limit(10)->get();
     // }
 
-    // public function getUserById($params)
-    // {
-    //     return User::where('id', $params['id'])->with(['StaffPosition:id,allowed_vue_router_routes'])->first();
-    // }
+    public function getUserById($params)
+    {
+        return User::select(['id','name','email'])->where('id', $params['id'])->first();
+    }
 
-    // public function createUser($params)
-    // {
-    //     return User::create([
-    //         'username' => $params['username'],
-    //         'email' => $params['email'],
-    //         'full_name' => $params['full_name'],
-    //         'phone' => $params['phone'],
-    //         'address' => $params['address'],
-    //         'birthday' => $params['birthday'],
-    //         'department_id' => $params['department_id'],
-    //         'branch_id' => $params['branch_id'],
-    //         'district_id' => $params['district_id'],
-    //         'ward_id' => $params['ward_id'],
-    //         'province_id' => $params['province_id'],
-    //         'hire_date' => $params['hire_date'],
-    //         'staff_position_id' => $params['staff_position_id'],
-    //         'password' => \Hash::make('12345678'),
-    //     ]);
-    // }
+    public function createUser($params)
+    {
+        return User::create($params);
+    }
 
-    // public function update($params, $user)
-    // {
-    //     return $user->update($params);
-    // }
+    public function update($params)
+    {   
+        $user = User::find($params['id']);
+        return $user->update($params);
+    }
 
-    // public function delete($params)
-    // {
-    //     return User::where('id', $params['id'])->delete();
-    // }
+    public function delete($id)
+    {
+        return User::where('id', $id)->delete();
+    }
 }
